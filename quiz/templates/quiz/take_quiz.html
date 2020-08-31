@@ -1,0 +1,57 @@
+
+{% extends 'quiz/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<h3 id='counts'>60</h3>
+
+<article id="story">
+    
+    {% for story in stories  %}
+    
+    <small id="instruction" > <em>Read the story carefully and answer the questions that follows</em></small>
+
+    <h1 style="color: black;"> {{story.title}}</h1>
+    
+    
+    <p>{{story.text}}</p>
+  
+    {% endfor %}
+        
+</article>
+
+<form id="form" action="" method="POST">
+{% csrf_token %}
+
+<small id="instruction"> <em>Answer the following questions about the story
+</em></small>
+
+
+{% for item in questions  %}
+ <h3 id="tag">{{item.id}}. {{item.label}}</h3>
+ <input type="radio" id="{{item.a}}{{item.id}}" name="option{{item.id}}" value="a">
+ <label for="{{item.a}}{{item.id}}">{{item.a}}</label><br>
+
+ <input type="radio" id="{{item.b}}{{item.id}}" name="option{{item.id}}" value="b">
+ <label for="{{item.b}}{{item.id}}">{{item.b}}</label><br>
+
+ <input type="radio" id="{{item.c}}{{item.id}}" name="option{{item.id}}" value="c">
+ <label for="{{item.c}}{{item.id}}">{{item.c}}</label><br>
+
+ <input type="radio" id="{{item.d}}{{item.id}}" name="option{{item.id}}" value="d">
+ <label for="{{item.d}}{{item.id}}">{{item.d}}</label> <br> <br>
+
+    
+
+    
+{% endfor %}
+  
+<input type="submit" value="Submit">
+</form>
+
+<script src="{% static '/js/main.js' %}"></script>
+{% endblock content %}
+    
